@@ -11,8 +11,24 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-export default {
-	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-		return new Response('Hello World!');
-	},
+var src_default = {
+	async fetch(request, env, ctx){
+	   console.log("Logging: " + request.url)
+
+		if(request.method == "POST"){
+			return new Response('{ "json": "content" }', {
+				headers: {
+					'content-type': 'application/json'
+				},
+			});
+		}
+
+
+
+	   return new Response("Hello World!");
+	}
+};
+
+export {
+    src_default as default
 };
